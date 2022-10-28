@@ -1,0 +1,21 @@
+.ContextMenu {
+   background: white;
+   position: absolute;
+   padding: 5px;
+   border-radius: 5px;
+   box-shadow: 0 0 5px black;
+}
+
+.ItemName {
+   border-bottom: 2px solid black;
+   text-align: center;
+}
+
+.ContextList {
+   display: flex;
+   flex-direction: column;
+}
+
+.ItemList {
+   margin-bottom: 4px;
+}

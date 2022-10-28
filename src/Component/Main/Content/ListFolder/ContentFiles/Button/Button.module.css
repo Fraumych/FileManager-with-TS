@@ -1,0 +1,12 @@
+.Position {
+   width: 50px;
+}
+
+.PositionMenu {
+   position: relative;
+   height: 19px;
+}
+
+.Button {
+   margin-top: -4px;
+}

@@ -1,0 +1,10 @@
+.LoginForm {
+   max-width: 248px;
+   align-items: center;
+   margin: auto;
+}
+
+form .LoginButton {
+   padding: 8px 34px;
+   font-size: 18px;
+}

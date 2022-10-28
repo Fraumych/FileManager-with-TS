@@ -1,0 +1,9 @@
+.BreadCrumbs {
+   display: flex;
+   margin-bottom: 10px;
+}
+
+.pathCrumbs {
+   margin: 5px;
+   display: flex;
+}

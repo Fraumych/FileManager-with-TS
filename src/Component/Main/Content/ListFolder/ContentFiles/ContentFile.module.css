@@ -1,0 +1,10 @@
+.FileName {
+   cursor: pointer;
+   width: auto;
+   display: inline;
+   margin: 0;
+}
+
+.PositionIcon {
+   margin-right: 5px;
+}

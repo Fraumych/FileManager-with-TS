@@ -1,0 +1,8 @@
+.InputColumn {
+   width: 40px;
+}
+
+.FilesColumn {
+   display: flex;
+   justify-content: space-between;
+}

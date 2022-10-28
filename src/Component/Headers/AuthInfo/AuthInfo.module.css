@@ -1,0 +1,19 @@
+.AuthInfo {
+   display: flex;
+   align-items: center;
+}
+
+.UserName {
+   margin: 0px;
+   padding-right: 8px;
+}
+
+.UserLogo {
+   width: 35px;
+   border: 1px solid #999999;
+   border-radius: 50%;
+}
+
+.ButtonExit {
+   margin: 0px;
+}
