@@ -7,9 +7,9 @@ import ListFolder from "../Component/Main/Content/ListFolder/ListFolder";
 import { UserContext } from "../UserStore";
 import Style from "./File.module.css";
 
-const File = () => {
-   const { Authorization, getListFolder } = useContext(APIContext);
-   const { isAuth } = useContext(UserContext);
+const File: React.FC = () => {
+   const { Authorization, getListFolder, accountName } = useContext(APIContext);
+   const { isAuth, setIsAuth, setUserName, setUserPhoto } = useContext(UserContext);
    const navigate = useNavigate();
 
    const [listFolder, setListFolder] = useState(
@@ -22,29 +22,43 @@ const File = () => {
 
    useEffect(() => {
       if (!isAuth) {
-
-         Authorization().then(res => {
-            localStorage.setItem("isAuth", true);
-            localStorage.setItem("token", res.data.access_token);
-         }).then(() => { window.location.reload(); })
-            .catch(() => {
-               navigate("/");
-               localStorage.clear();
-               window.location.reload();
+         if (new URLSearchParams(window.location.search).get("code")) {
+            Authorization().then(res => {
+               localStorage.setItem("isAuth", "true");
+               setIsAuth(true);
+               localStorage.setItem("token", res.data.access_token);
+            }).then(() => {
+               getListFolder("").then(
+                  res => {
+                     setListFolder(res.data);
+                  });
+               accountName().then(data => {
+                  setUserName(data.data.name.familiar_name);
+                  setUserPhoto(data.data.profile_photo_url);
+               });
             });
-      }
+         } navigate("/");
 
-      if (isAuth) getListFolder().then(
-         res => {
-            setListFolder(res.data);
+      } else {
+         getListFolder("").then(
+            res => {
+               setListFolder(res.data);
+            });
+         accountName().then(data => {
+            setUserName(data.data.name.familiar_name);
+            setUserPhoto(data.data.profile_photo_url);
          }).catch(() => {
             navigate("/");
-            localStorage.clear();
-            window.location.reload();
+            localStorage.removeItem("token");
+            localStorage.setItem("isAuth", "false");
+            setIsAuth(false);
          });
+      }
+
+
    }, []);
 
-   const handleClick = (e, folderPath) => {
+   const handleClick = (e: React.MouseEvent, folderPath: string) => {
       e.preventDefault();
       getListFolder(folderPath).then(res => {
          setPathFolder(folderPath);

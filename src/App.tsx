@@ -1,13 +1,12 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./utils/AppRouter";
-
 import UserStore from "./UserStore";
+import AppRouter from "./utils/AppRouter";
 import Footer from "./Component/Footer/Footer";
 import Headers from "./Component/Headers/Headers";
 import Style from "./App.module.css";
 
-import { APIrequest } from "./APIrequest";
+import APIrequest from "./APIrequest";
 
 const App: React.FC = () => {
    return (

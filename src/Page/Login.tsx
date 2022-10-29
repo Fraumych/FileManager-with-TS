@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Style from "./Login.module.css";
 
 
-const Login = () => {
+const Login: React.FC = () => {
    const navigate = useNavigate();
 
    const { isAuth } = useContext(UserContext);

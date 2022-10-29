@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { publicRoutes } from "./Routes";
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
 
    return (
       <Routes>
          {publicRoutes.map(({ path, Component }) =>
-            <Route key={path} path={path} element={<Component />} exact />
+            <Route key={path} path={path} element={<Component />} />
          )}
       </Routes>
    );
