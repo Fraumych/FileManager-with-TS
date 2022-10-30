@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const ButtonBack = ({ currentPathFolder, handleClickBack }) => {
+interface ButtonBackProps {
+   currentPathFolder: string,
+   handleClickBack: () => void
+}
+
+const ButtonBack: React.FC<ButtonBackProps> = ({ currentPathFolder, handleClickBack }) => {
    const [isDisabled, setDisabled] = useState(true);
 
    useEffect(() => {
@@ -12,7 +17,7 @@ const ButtonBack = ({ currentPathFolder, handleClickBack }) => {
    }, [currentPathFolder]);
 
    return (
-      <button className="btn btn-inverse" href={currentPathFolder} onClick={handleClickBack} disabled={isDisabled}>Назад</button>
+      <button className="btn btn-inverse" onClick={handleClickBack} disabled={isDisabled}>Назад</button>
    );
 };
 

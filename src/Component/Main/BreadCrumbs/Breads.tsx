@@ -3,8 +3,24 @@ import { APIContext } from "../../../APIrequest";
 import ButtonBack from "./ButtonBack";
 import Style from "./Breads.module.css";
 
+interface listFolderData {
+   entries: {
+      id: string,
+      name: string,
+      size: number,
+      "client_modified": string,
+      ".tag": string,
+      "path_display": string
+   }[]
+}
 
-const BreadCrumbs = ({ pathFolder, setPathFolder, setListFolder }) => {
+interface BreadCrumbsProps {
+   pathFolder: string,
+   setPathFolder: React.Dispatch<React.SetStateAction<string>>,
+   setListFolder: (value: React.SetStateAction<listFolderData>) => void
+}
+
+const BreadCrumbs: React.FC<BreadCrumbsProps> = ({ pathFolder, setPathFolder, setListFolder }) => {
 
    const { getListFolder } = useContext(APIContext);
    const [pathBack, setPathBack] = useState("");
@@ -26,9 +42,9 @@ const BreadCrumbs = ({ pathFolder, setPathFolder, setListFolder }) => {
    }, [path]);
 
    const handleClickBack = () => {
-      getListFolder(pathBack).then(result => {
+      getListFolder(pathBack).then(res => {
          setPathFolder(pathBack);
-         setListFolder(result.data);
+         setListFolder(res.data);
       });
 
    };
