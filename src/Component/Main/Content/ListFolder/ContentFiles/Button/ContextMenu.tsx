@@ -2,13 +2,17 @@ import React, { useContext } from "react";
 import { APIContext } from "../../../../../../APIrequest";
 import Style from "./Context.module.css";
 
-const ContextMenuList = ({ itemName, itemPath }) => {
+interface ContextMenuListProps {
+   itemName: string,
+   itemPath: string
+}
+
+const ContextMenuList: React.FC<ContextMenuListProps> = ({ itemName, itemPath }) => {
 
    const { deleteList } = useContext(APIContext);
 
-   const deleteFile = (itemPath) => {
-      deleteList(itemPath).then(alert("Файл удален"))
-         .then(window.location.reload());
+   const deleteFile = (itemPath: string) => {
+      deleteList(itemPath);
    };
 
    return (

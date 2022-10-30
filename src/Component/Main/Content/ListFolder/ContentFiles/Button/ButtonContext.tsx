@@ -2,12 +2,24 @@ import React from "react";
 import ContextMenuList from "./ContextMenu";
 import Style from "./Button.module.css";
 
-const ButtonContext = ({ item, contextMenuButton, setContextList, contextList, index }) => {
+interface ButtonContextProps {
+   index: number,
+   item: {
+      id: string,
+      name: string,
+      "path_display": string
+   },
+   contextMenuButton: string,
+   setContextList: React.Dispatch<React.SetStateAction<boolean>>,
+   contextList: boolean
+}
+
+const ButtonContext: React.FC<ButtonContextProps> = ({ item, contextMenuButton, setContextList, contextList, index }) => {
    return (
       <div className={Style.Position}>
          {item.id === contextMenuButton ?
             <div className={Style.PositionMenu}>
-               <button className={`btn ${Style.Button}`} id={index}
+               <button className={`btn ${Style.Button}`} id={index + ""}
                   onClick={() => setContextList(() => {
                      if (contextList) {
                         return false;

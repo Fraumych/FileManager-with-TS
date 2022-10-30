@@ -4,10 +4,22 @@ import ContentFolder from "./ContentFiles/ContentFolder";
 import Style from "./ListFolder.module.css";
 import ButtonContext from "./ContentFiles/Button/ButtonContext";
 
-const ListFolder = ({ handleClick, listFolder }) => {
+interface ListFolderProps {
+   handleClick: (e: React.MouseEvent, folderPath: string) => void,
+   listFolder: {
+      entries: {
+         id: string,
+         name: string,
+         size: number,
+         "client_modified": string,
+         ".tag": string,
+         "path_display": string
+      }[]
+   }
+};
 
-   const [contextMenuButton, setContextMenuButton] = useState();
-
+const ListFolder: React.FC<ListFolderProps> = ({ handleClick, listFolder }) => {
+   const [contextMenuButton, setContextMenuButton] = useState("");
    const [contextList, setContextList] = useState(false);
 
    return (
@@ -20,7 +32,7 @@ const ListFolder = ({ handleClick, listFolder }) => {
                      setContextMenuButton(item.id);
                   }}
                   onMouseLeave={() => {
-                     setContextMenuButton(null);
+                     setContextMenuButton("");
                      setContextList(false);
                   }}>
 

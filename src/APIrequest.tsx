@@ -55,7 +55,8 @@ const APIrequest: React.FC<{ children: React.ReactNode }> = ({ children }) => {
    const deleteList = (path: string) => {
       return axData.post("/2/files/delete_v2", {
          "path": path,
-      });
+      }).then(() => alert("Файл удален"))
+         .then(() => window.location.reload());
    };
 
    return (

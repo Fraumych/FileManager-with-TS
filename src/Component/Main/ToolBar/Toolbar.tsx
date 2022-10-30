@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import ToolBarButton from "./ToolBarButton";
 import Style from "./ToolBar.module.css";
 
-const Toolbar = () => {
+const Toolbar: React.FC = () => {
    const [modalActive, setModalActive] = useState(false);
 
 

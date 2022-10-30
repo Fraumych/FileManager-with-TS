@@ -7,15 +7,23 @@ import ListFolder from "../Component/Main/Content/ListFolder/ListFolder";
 import { UserContext } from "../UserStore";
 import Style from "./File.module.css";
 
+interface listFolderData {
+   entries: {
+      id: string,
+      name: string,
+      size: number,
+      "client_modified": string,
+      ".tag": string,
+      "path_display": string
+   }[]
+}
+//id: string, name: string, size: number, "client_modified": string
 const File: React.FC = () => {
    const { Authorization, getListFolder, accountName } = useContext(APIContext);
    const { isAuth, setIsAuth, setUserName, setUserPhoto } = useContext(UserContext);
    const navigate = useNavigate();
 
-   const [listFolder, setListFolder] = useState(
-      {
-         entries: [],
-      });
+   const [listFolder, setListFolder] = useState<listFolderData>({ entries: [] });
 
    const [pathFolder, setPathFolder] = useState("");
 
@@ -33,6 +41,8 @@ const File: React.FC = () => {
                      setListFolder(res.data);
                   });
                accountName().then(data => {
+                  localStorage.setItem("userName", data.data.name.familiar_name);
+                  localStorage.setItem("userPhoto", data.data.profile_photo_url);
                   setUserName(data.data.name.familiar_name);
                   setUserPhoto(data.data.profile_photo_url);
                });
@@ -43,21 +53,20 @@ const File: React.FC = () => {
          getListFolder("").then(
             res => {
                setListFolder(res.data);
-            });
-         accountName().then(data => {
-            setUserName(data.data.name.familiar_name);
-            setUserPhoto(data.data.profile_photo_url);
-         }).catch(() => {
-            navigate("/");
-            localStorage.removeItem("token");
-            localStorage.setItem("isAuth", "false");
-            setIsAuth(false);
-         });
+
+            }).catch(() => {
+               localStorage.setItem("isAuth", "false");
+               setIsAuth(false);
+               localStorage.removeItem("userName");
+               localStorage.removeItem("userPhoto");
+               localStorage.removeItem("token");
+               navigate("/");
+            }
+            );
       }
 
 
    }, []);
-
    const handleClick = (e: React.MouseEvent, folderPath: string) => {
       e.preventDefault();
       getListFolder(folderPath).then(res => {

@@ -3,7 +3,7 @@ import AuthInfo from "./AuthInfo/AuthInfo";
 import Style from "./Headers.module.css";
 
 
-const Headers = () => {
+const Headers: React.FC = () => {
 
    return (
       <>

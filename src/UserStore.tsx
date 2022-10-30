@@ -12,8 +12,8 @@ export const UserContext = createContext({} as ValueUser);
 
 const UserStore: React.FC<PropsWithChildren> = ({ children }) => {
    const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth") === "true");
-   const [userName, setUserName] = useState("");
-   const [userPhoto, setUserPhoto] = useState("");
+   const [userName, setUserName] = useState(localStorage.getItem("userName")!);
+   const [userPhoto, setUserPhoto] = useState(localStorage.getItem("userPhoto")!);
 
    return (
       <UserContext.Provider value={{ isAuth, setIsAuth, userName, setUserName, userPhoto, setUserPhoto }}>{children}</UserContext.Provider>

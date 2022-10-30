@@ -1,7 +1,15 @@
 import React from "react";
 import Style from "./ContentFolder.module.css";
 
-const ContentFolder = ({ item, handleClick }) => {
+interface FolderProps {
+   handleClick: (e: React.MouseEvent, folderPath: string) => void,
+   item: {
+      name: string,
+      "path_display": string
+   }
+};
+
+const ContentFolder: React.FC<FolderProps> = ({ item, handleClick }) => {
    const pathHref = window.location.pathname;
 
    return (

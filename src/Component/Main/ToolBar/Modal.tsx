@@ -1,7 +1,12 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ active, setActive }) => {
+interface ModalProps {
+   active: boolean,
+   setActive: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Modal: React.FC<ModalProps> = ({ active, setActive }) => {
 
    return (
       <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
