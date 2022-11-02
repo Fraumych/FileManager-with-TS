@@ -17,25 +17,14 @@ interface ButtonContextProps {
 const ButtonContext: React.FC<ButtonContextProps> = ({ item, contextMenuButton, setContextList, contextList, index }) => {
    return (
       <div className={Style.Position}>
-         {item.id === contextMenuButton ?
+         {item.id === contextMenuButton &&
             <div className={Style.PositionMenu}>
                <button className={`btn ${Style.Button}`} id={index + ""}
-                  onClick={() => setContextList(() => {
-                     if (contextList) {
-                        return false;
-                     } else {
-                        return true;
-                     }
-                  })}
+                  onClick={() => setContextList(prev => !prev)}
                >Ещё
                </button>
-               {contextList ?
-                  <ContextMenuList itemName={item.name} itemPath={item.path_display} />
-                  :
-                  null}
-            </div>
-            :
-            null}
+               {contextList && <ContextMenuList itemName={item.name} itemPath={item.path_display} />}
+            </div>}
       </div>
    );
 };

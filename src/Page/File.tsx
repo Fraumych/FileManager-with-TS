@@ -67,7 +67,7 @@ const File: React.FC = () => {
 
 
    }, []);
-   const handleClick = (e: React.MouseEvent, folderPath: string) => {
+   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => {
       e.preventDefault();
       getListFolder(folderPath).then(res => {
          setPathFolder(folderPath);

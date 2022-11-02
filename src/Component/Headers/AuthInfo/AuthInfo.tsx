@@ -21,13 +21,10 @@ const AuthInfo: React.FC = () => {
 
    return (
       <div className={Style.AuthInfo}>
-         {isAuth ?
-            <>
-               <h4 className={Style.UserName}>Здравствуйте, {userName} <img className={Style.UserLogo} src={userPhoto} alt="UserLogo" /></h4>
-               <button className={`btn ${Style.ButtonExit}`} onClick={handleLogOut}>Выход</button>
-            </>
-            :
-            null}
+         {isAuth && <>
+            <h4 className={Style.UserName}>Здравствуйте, {userName} <img className={Style.UserLogo} src={userPhoto} alt="UserLogo" /></h4>
+            <button className={`btn ${Style.ButtonExit}`} onClick={handleLogOut}>Выход</button>
+         </>}
       </div>
    );
 };

@@ -5,7 +5,7 @@ import Style from "./ListFolder.module.css";
 import ButtonContext from "./ContentFiles/Button/ButtonContext";
 
 interface ListFolderProps {
-   handleClick: (e: React.MouseEvent, folderPath: string) => void,
+   handleClick: (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => void,
    listFolder: {
       entries: {
          id: string,

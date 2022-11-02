@@ -2,7 +2,7 @@ import React from "react";
 import Style from "./ContentFolder.module.css";
 
 interface FolderProps {
-   handleClick: (e: React.MouseEvent, folderPath: string) => void,
+   handleClick: (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => void,
    item: {
       name: string,
       "path_display": string
