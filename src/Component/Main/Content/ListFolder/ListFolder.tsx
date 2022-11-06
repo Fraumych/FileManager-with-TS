@@ -3,19 +3,12 @@ import ContentFile from "./ContentFiles/ContentFile";
 import ContentFolder from "./ContentFiles/ContentFolder";
 import Style from "./ListFolder.module.css";
 import ButtonContext from "./ContentFiles/Button/ButtonContext";
+import { IListFolder } from "../../../../models/Files/IListFolder";
 
 interface ListFolderProps {
    handleClick: (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => void,
-   listFolder: {
-      entries: {
-         id: string,
-         name: string,
-         size: number,
-         "client_modified": string,
-         ".tag": string,
-         "path_display": string
-      }[]
-   }
+   listFolder: IListFolder[]
+
 };
 
 const ListFolder: React.FC<ListFolderProps> = ({ handleClick, listFolder }) => {
@@ -24,7 +17,7 @@ const ListFolder: React.FC<ListFolderProps> = ({ handleClick, listFolder }) => {
 
    return (
       <>
-         {listFolder.entries.map((item, index) => {
+         {listFolder.map((item, index) => {
             return (
 
                <tr key={index}

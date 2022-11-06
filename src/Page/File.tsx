@@ -2,43 +2,33 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { APIContext } from "../APIrequest";
 import Toolbar from "../Component/Main/ToolBar/Toolbar";
-import BreadCrumbs from "../Component/Main/BreadCrumbs/Breads";
+import BreadCrumbs from "../Component/Main/BreadCrumbs/BreadCrumbs";
 import ListFolder from "../Component/Main/Content/ListFolder/ListFolder";
 import { UserContext } from "../UserStore";
 import Style from "./File.module.css";
+import { IListFolder } from "../models/Files/IListFolder";
 
-interface listFolderData {
-   entries: {
-      id: string,
-      name: string,
-      size: number,
-      "client_modified": string,
-      ".tag": string,
-      "path_display": string
-   }[]
-}
-//id: string, name: string, size: number, "client_modified": string
 const File: React.FC = () => {
    const { Authorization, getListFolder, accountName } = useContext(APIContext);
    const { isAuth, setIsAuth, setUserName, setUserPhoto } = useContext(UserContext);
    const navigate = useNavigate();
 
-   const [listFolder, setListFolder] = useState<listFolderData>({ entries: [] });
+   const [listFolder, setListFolder] = useState<IListFolder[]>([]);
 
    const [pathFolder, setPathFolder] = useState("");
-
 
    useEffect(() => {
       if (!isAuth) {
          if (new URLSearchParams(window.location.search).get("code")) {
             Authorization().then(res => {
+
                localStorage.setItem("isAuth", "true");
                setIsAuth(true);
                localStorage.setItem("token", res.data.access_token);
             }).then(() => {
                getListFolder("").then(
                   res => {
-                     setListFolder(res.data);
+                     setListFolder(res.data.entries);
                   });
                accountName().then(data => {
                   localStorage.setItem("userName", data.data.name.familiar_name);
@@ -52,7 +42,7 @@ const File: React.FC = () => {
       } else {
          getListFolder("").then(
             res => {
-               setListFolder(res.data);
+               setListFolder(res.data.entries);
 
             }).catch(() => {
                localStorage.setItem("isAuth", "false");
@@ -71,7 +61,7 @@ const File: React.FC = () => {
       e.preventDefault();
       getListFolder(folderPath).then(res => {
          setPathFolder(folderPath);
-         setListFolder(res.data);
+         setListFolder(res.data.entries);
       });
    };
 
@@ -90,7 +80,7 @@ const File: React.FC = () => {
                </tr>
 
             </thead>
-            {listFolder.entries.length > 0 ?
+            {listFolder.length > 0 ?
                <tbody>
                   <ListFolder listFolder={listFolder} handleClick={handleClick} /></tbody>
                :

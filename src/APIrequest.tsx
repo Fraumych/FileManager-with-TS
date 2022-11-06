@@ -1,16 +1,19 @@
-import React, { createContext } from "react";
+import React, { createContext, PropsWithChildren } from "react";
 import axios, { AxiosResponse } from "axios";
+import { ListResponse } from "./models/Files/ListResponse";
+import { IUser } from "./models/Files/IUser";
+import { IAuth } from "./models/Auth/IAuth";
 
 interface ValueAPI {
-   Authorization: () => Promise<AxiosResponse<any, any>>,
-   accountName: () => Promise<AxiosResponse<any, any>>,
-   getListFolder: (path: string) => Promise<AxiosResponse<any, any>>,
+   Authorization: () => Promise<AxiosResponse<IAuth>>,
+   accountName: () => Promise<AxiosResponse<IUser>>,
+   getListFolder: (path: string) => Promise<AxiosResponse<ListResponse>>,
    deleteList: (path: string) => void
 }
 
 export const APIContext = createContext({} as ValueAPI);
 
-const APIrequest: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const APIrequest: React.FC<PropsWithChildren> = ({ children }) => {
 
    const axAuth = axios.create({
       baseURL: "https://api.dropboxapi.com",
@@ -25,7 +28,7 @@ const APIrequest: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       return config;
    });
 
-   const Authorization = () => {
+   const Authorization = (): Promise<AxiosResponse<IAuth>> => {
       let token = new URLSearchParams(window.location.search).get("code");
 
       return axAuth.post("/oauth2/token", `code=${token}&grant_type=authorization_code&redirect_uri=http://localhost:3000/file`, {
@@ -36,12 +39,12 @@ const APIrequest: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       });
    };
 
-   const accountName = () => {
-      return axData.post("/2/users/get_current_account");
+   const accountName = (): Promise<AxiosResponse<IUser>> => {
+      return axData.post<IUser>("/2/users/get_current_account");
    };
 
-   const getListFolder = (path = "") => {
-      return axData.post("/2/files/list_folder", {
+   const getListFolder = (path: string = ""): Promise<AxiosResponse<ListResponse>> => {
+      return axData.post<ListResponse>("/2/files/list_folder", {
          "include_deleted": false,
          "include_has_explicit_shared_members": false,
          "include_media_info": false,
