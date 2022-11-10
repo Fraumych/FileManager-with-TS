@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import UserStore from "./UserStore";
 import AppRouter from "./utils/AppRouter";
 import Footer from "./Component/Footer/Footer";
@@ -12,13 +12,13 @@ const App: React.FC = () => {
    return (
       <UserStore>
          <APIrequest>
-            <BrowserRouter>
+            <HashRouter>
                <Headers />
                <main className={`container ${Style.Main}`}>
                   <AppRouter />
                </main>
                <Footer />
-            </BrowserRouter>
+            </HashRouter>
          </APIrequest>
       </UserStore>
 
