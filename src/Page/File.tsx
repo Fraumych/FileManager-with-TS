@@ -54,8 +54,6 @@ const File: React.FC = () => {
             }
             );
       }
-
-
    }, []);
    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => {
       e.preventDefault();

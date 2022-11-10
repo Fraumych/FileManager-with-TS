@@ -4,7 +4,7 @@
    margin: auto;
 }
 
-form .LoginButton {
+div .LoginButton {
    padding: 8px 34px;
    font-size: 18px;
 }

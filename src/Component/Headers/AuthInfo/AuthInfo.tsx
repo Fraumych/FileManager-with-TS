@@ -9,8 +9,7 @@ const AuthInfo: React.FC = () => {
    const navigate = useNavigate();
 
 
-   const handleLogOut = (e: React.MouseEvent) => {
-      e.preventDefault();
+   const handleLogOut = () => {
       localStorage.setItem("isAuth", "false");
       setIsAuth(false);
       localStorage.removeItem("userName");

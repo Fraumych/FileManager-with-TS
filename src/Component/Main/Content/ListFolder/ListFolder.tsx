@@ -8,7 +8,6 @@ import { IListFolder } from "../../../../models/Files/IListFolder";
 interface ListFolderProps {
    handleClick: (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => void,
    listFolder: IListFolder[]
-
 };
 
 const ListFolder: React.FC<ListFolderProps> = ({ handleClick, listFolder }) => {

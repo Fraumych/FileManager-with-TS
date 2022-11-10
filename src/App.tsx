@@ -14,9 +14,9 @@ const App: React.FC = () => {
          <APIrequest>
             <BrowserRouter>
                <Headers />
-               <div className={`container ${Style.Main}`}>
+               <main className={`container ${Style.Main}`}>
                   <AppRouter />
-               </div>
+               </main>
                <Footer />
             </BrowserRouter>
          </APIrequest>

@@ -1,16 +1,24 @@
-import React, { createContext, PropsWithChildren, useState } from "react";
+import React, { createContext, useState, Dispatch } from "react";
 
-interface ValueUser {
+const ValueUser: {
    isAuth: boolean,
    userName: string,
    userPhoto: string,
-   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>,
-   setUserName: React.Dispatch<React.SetStateAction<string>>,
-   setUserPhoto: React.Dispatch<React.SetStateAction<string>>
-}
-export const UserContext = createContext({} as ValueUser);
+   setIsAuth: Dispatch<boolean>,
+   setUserName: Dispatch<string>,
+   setUserPhoto: Dispatch<string>
+} = {
+   isAuth: false,
+   userName: "",
+   userPhoto: "",
+   setIsAuth: () => null,
+   setUserName: () => null,
+   setUserPhoto: () => null
+};
 
-const UserStore: React.FC<PropsWithChildren> = ({ children }) => {
+export const UserContext = createContext(ValueUser);
+
+const UserStore: React.FC<{ children: React.ReactNode }> = ({ children }) => {
    const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth") === "true");
    const [userName, setUserName] = useState(localStorage.getItem("userName")!);
    const [userPhoto, setUserPhoto] = useState(localStorage.getItem("userPhoto")!);

@@ -19,10 +19,10 @@ const Login: React.FC = () => {
 
    return (
 
-      <form className={`well form-search ${Style.LoginForm}`}>
+      <div className={`well form-search ${Style.LoginForm}`}>
          <h3>Вход</h3>
          <a href={urlAuth} className={`btn btn-inverse ${Style.LoginButton}`}>Войти через DropBox</a>
-      </form>
+      </div>
 
    );
 };

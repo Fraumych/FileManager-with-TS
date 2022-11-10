@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Dispatch } from "react";
 
 interface ToolBarButtonProps {
-   setModal: React.Dispatch<React.SetStateAction<boolean>>,
+   setModalActive: Dispatch<boolean>,
    children: React.ReactNode
 };
 
-const ToolBarButton: React.FC<ToolBarButtonProps> = ({ setModal, children }) => {
+const ToolBarButton: React.FC<ToolBarButtonProps> = ({ setModalActive, children }) => {
    return (
-      <button className="btn" onClick={() => { setModal(true); }}>{children}</button>
+      <button className="btn" onClick={() => { setModalActive(true); }}>{children}</button>
    );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../ModalWindow/Modal";
 import ToolBarButton from "./ToolBarButton";
 import Style from "./ToolBar.module.css";
 
@@ -10,13 +10,16 @@ const Toolbar: React.FC = () => {
    return (
       <>
          <div className={`btn-group ${Style.ToolBarList}`}>
-            <ToolBarButton setModal={setModalActive}>Копировать</ToolBarButton>
-            <ToolBarButton setModal={setModalActive}>Вырезать</ToolBarButton>
-            <ToolBarButton setModal={setModalActive}>Удалить</ToolBarButton>
-            <ToolBarButton setModal={setModalActive}>Скачать</ToolBarButton>
+            <ToolBarButton setModalActive={setModalActive}>Копировать</ToolBarButton>
+            <ToolBarButton setModalActive={setModalActive}>Вырезать</ToolBarButton>
+            <ToolBarButton setModalActive={setModalActive}>Удалить</ToolBarButton>
+            <ToolBarButton setModalActive={setModalActive}>Скачать</ToolBarButton>
          </div>
 
-         <Modal active={modalActive} setActive={setModalActive} />
+         <Modal modalActive={modalActive} setModalActive={setModalActive}>
+            <h1>Не реализовано</h1>
+            <button className="btn btn-primary button-1" onClick={() => setModalActive(false)}>Ок</button>
+         </Modal>
       </>
    );
 };
