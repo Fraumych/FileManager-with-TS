@@ -1,7 +1,7 @@
 {
-   "name": "drop",
+   "name": "filemanager-with-ts",
    "version": "0.1.0",
-   "homepage": "fraumych.github.io/FileManager-with-TS",
+   "homepage": "fraumych.github.io/FileManager-with-TS/public",
    "private": false,
    "dependencies": {
       "@testing-library/jest-dom": "^5.16.4",
