@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from "../UserStore";
 import Style from "./Login.module.css";
 import { APIContext } from "../APIrequest";
-import File from "./File";
+import File from "../Component/Main/File";
 
 
 const Login: React.FC = () => {

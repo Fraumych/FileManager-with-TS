@@ -15,7 +15,9 @@ const App: React.FC = () => {
             <BrowserRouter>
                <Headers />
                <main className={`container ${Style.Main}`}>
-                  <Routes><Route key={"/"} path={"/"} element={<Login />} /></Routes>
+                  <Routes>
+                     <Route key={"/"} path={"/"} element={<Login />} />
+                  </Routes>
                </main>
                <Footer />
             </BrowserRouter>

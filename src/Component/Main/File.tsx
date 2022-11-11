@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { APIContext } from "../APIrequest";
-import Toolbar from "../Component/Main/ToolBar/Toolbar";
-import BreadCrumbs from "../Component/Main/BreadCrumbs/BreadCrumbs";
-import ListFolder from "../Component/Main/Content/ListFolder/ListFolder";
-import { UserContext } from "../UserStore";
+import { APIContext } from "../../APIrequest";
+import Toolbar from "./ToolBar/Toolbar";
+import BreadCrumbs from "./BreadCrumbs/BreadCrumbs";
+import ListFolder from "./Content/ListFolder/ListFolder";
+import { UserContext } from "../../UserStore";
 import Style from "./File.module.css";
-import { IListFolder } from "../models/Files/IListFolder";
+import { IListFolder } from "../../models/Files/IListFolder";
 
 const File: React.FC = () => {
    const { getListFolder, accountName } = useContext(APIContext);
