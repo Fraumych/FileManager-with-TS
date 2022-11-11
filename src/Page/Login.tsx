@@ -1,30 +1,37 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../UserStore";
-import { useNavigate } from "react-router-dom";
 import Style from "./Login.module.css";
+import { APIContext } from "../APIrequest";
+import File from "./File";
 
 
 const Login: React.FC = () => {
-   const navigate = useNavigate();
+   const { Authorization } = useContext(APIContext);
+   const { isAuth, setIsAuth } = useContext(UserContext);
 
-   const { isAuth } = useContext(UserContext);
-
-   const urlAuth = "https://www.dropbox.com/1/oauth2/authorize?client_id=xnumlhdrd6w4xcb&response_type=code&token_access_type=offline&redirect_uri=https://fraumych.github.io/&state=<CSRF token>";
+   const urlAuth = "https://www.dropbox.com/1/oauth2/authorize?client_id=xnumlhdrd6w4xcb&response_type=code&token_access_type=offline&redirect_uri=http://localhost:3000/&state=<CSRF token>";
 
    useEffect(() => {
-      if (isAuth) {
-         navigate("/file");
+      if (!isAuth) {
+         if (new URLSearchParams(window.location.search).get("code")) {
+            Authorization().then(res => {
+
+               localStorage.setItem("isAuth", "true");
+               setIsAuth(true);
+               localStorage.setItem("token", res.data.access_token);
+            });
+         }
       }
-   });
+   }, []);
 
    return (
-
-      <div className={`well form-search ${Style.LoginForm}`}>
-         <h3>Вход</h3>
-         <a href={urlAuth} className={`btn btn-inverse ${Style.LoginButton}`}>Войти через DropBox</a>
-      </div>
-
-   );
+      <>{isAuth ?
+         <File />
+         :
+         <div className={`well form-search ${Style.LoginForm}`}>
+            <h3>Вход</h3>
+            <a href={urlAuth} className={`btn btn-inverse ${Style.LoginButton}`}>Войти через DropBox</a>
+         </div>}</>);
 };
 
 

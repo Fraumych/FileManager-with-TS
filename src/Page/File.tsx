@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { APIContext } from "../APIrequest";
 import Toolbar from "../Component/Main/ToolBar/Toolbar";
 import BreadCrumbs from "../Component/Main/BreadCrumbs/BreadCrumbs";
@@ -9,52 +8,30 @@ import Style from "./File.module.css";
 import { IListFolder } from "../models/Files/IListFolder";
 
 const File: React.FC = () => {
-   const { Authorization, getListFolder, accountName } = useContext(APIContext);
-   const { isAuth, setIsAuth, setUserName, setUserPhoto } = useContext(UserContext);
-   const navigate = useNavigate();
+   const { getListFolder, accountName } = useContext(APIContext);
+   const { setUserName, setUserPhoto } = useContext(UserContext);
 
    const [listFolder, setListFolder] = useState<IListFolder[]>([]);
 
    const [pathFolder, setPathFolder] = useState("");
 
    useEffect(() => {
-      if (!isAuth) {
-         if (new URLSearchParams(window.location.search).get("code")) {
-            Authorization().then(res => {
 
-               localStorage.setItem("isAuth", "true");
-               setIsAuth(true);
-               localStorage.setItem("token", res.data.access_token);
-            }).then(() => {
-               getListFolder("").then(
-                  res => {
-                     setListFolder(res.data.entries);
-                  });
-               accountName().then(data => {
-                  localStorage.setItem("userName", data.data.name.familiar_name);
-                  localStorage.setItem("userPhoto", data.data.profile_photo_url);
-                  setUserName(data.data.name.familiar_name);
-                  setUserPhoto(data.data.profile_photo_url);
-               });
-            });
-         } navigate("/");
+      getListFolder("").then(
+         res => {
+            setListFolder(res.data.entries);
+         });
 
-      } else {
-         getListFolder("").then(
-            res => {
-               setListFolder(res.data.entries);
+      accountName().then(data => {
+         localStorage.setItem("userName", data.data.name.familiar_name);
+         localStorage.setItem("userPhoto", data.data.profile_photo_url);
+         setUserName(data.data.name.familiar_name);
+         setUserPhoto(data.data.profile_photo_url);
+      });
 
-            }).catch(() => {
-               localStorage.setItem("isAuth", "false");
-               setIsAuth(false);
-               localStorage.removeItem("userName");
-               localStorage.removeItem("userPhoto");
-               localStorage.removeItem("token");
-               navigate("/");
-            }
-            );
-      }
+
    }, []);
+
    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, folderPath: string) => {
       e.preventDefault();
       getListFolder(folderPath).then(res => {

@@ -31,7 +31,7 @@ const APIrequest: React.FC<PropsWithChildren> = ({ children }) => {
    const Authorization = (): Promise<AxiosResponse<IAuth>> => {
       let token = new URLSearchParams(window.location.search).get("code");
 
-      return axAuth.post<IAuth>("/oauth2/token", `code=${token}&grant_type=authorization_code&redirect_uri=http://localhost:3000/file`, {
+      return axAuth.post<IAuth>("/oauth2/token", `code=${token}&grant_type=authorization_code&redirect_uri=http://localhost:3000/`, {
          headers: {
             Authorization: "Basic eG51bWxoZHJkNnc0eGNiOmJ1bnhycTBqNXM4bHlzMw==",
             "Content-Type": "application/x-www-form-urlencoded"
