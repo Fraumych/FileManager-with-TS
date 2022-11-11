@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/fraunych.github.io/static/css/main.0d717213.css",
+    "main.css": "/fraunych.github.io/static/css/main.ba51f328.css",
     "main.js": "/fraunych.github.io/static/js/main.5c2bc818.js",
     "index.html": "/fraunych.github.io/index.html",
-    "main.0d717213.css.map": "/fraunych.github.io/static/css/main.0d717213.css.map",
+    "main.ba51f328.css.map": "/fraunych.github.io/static/css/main.ba51f328.css.map",
     "main.5c2bc818.js.map": "/fraunych.github.io/static/js/main.5c2bc818.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d717213.css",
+    "static/css/main.ba51f328.css",
     "static/js/main.5c2bc818.js"
   ]
 }
