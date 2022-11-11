@@ -9,7 +9,7 @@ const Login: React.FC = () => {
    const { Authorization } = useContext(APIContext);
    const { isAuth, setIsAuth } = useContext(UserContext);
 
-   const urlAuth = "https://www.dropbox.com/1/oauth2/authorize?client_id=xnumlhdrd6w4xcb&response_type=code&token_access_type=offline&redirect_uri=http://localhost:3000/&state=<CSRF token>";
+   const urlAuth = "https://www.dropbox.com/1/oauth2/authorize?client_id=xnumlhdrd6w4xcb&response_type=code&token_access_type=offline&redirect_uri=https://fraumych.github.io/&state=<CSRF token>";
 
    useEffect(() => {
       if (!isAuth) {
