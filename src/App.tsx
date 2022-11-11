@@ -6,7 +6,7 @@ import Headers from "./Component/Headers/Headers";
 import Style from "./App.module.css";
 
 import APIrequest from "./APIrequest";
-import Login from "./Page/Login";
+import Home from "./Page/Home";
 
 const App: React.FC = () => {
    return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
                <Headers />
                <main className={`container ${Style.Main}`}>
                   <Routes>
-                     <Route key={"/"} path={"/"} element={<Login />} />
+                     <Route key={"/"} path={"/"} element={<Home />} />
                   </Routes>
                </main>
                <Footer />

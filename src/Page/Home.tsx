@@ -5,7 +5,7 @@ import { APIContext } from "../APIrequest";
 import File from "../Component/Main/File";
 
 
-const Login: React.FC = () => {
+const Home: React.FC = () => {
    const { Authorization } = useContext(APIContext);
    const { isAuth, setIsAuth } = useContext(UserContext);
 
@@ -35,4 +35,4 @@ const Login: React.FC = () => {
 };
 
 
-export default Login;
+export default Home;
