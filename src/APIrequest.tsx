@@ -8,6 +8,7 @@ interface ValueAPI {
    Authorization: () => Promise<AxiosResponse<IAuth>>,
    accountName: () => Promise<AxiosResponse<IUser>>,
    getListFolder: (path: string) => Promise<AxiosResponse<ListResponse>>,
+   createFolder: (curentPath: string, name: string) => Promise<AxiosResponse<any, any>>
    deleteList: (path: string) => void
 }
 
@@ -29,9 +30,9 @@ const APIrequest: React.FC<PropsWithChildren> = ({ children }) => {
    });
 
    const Authorization = (): Promise<AxiosResponse<IAuth>> => {
-      let token = new URLSearchParams(window.location.search).get("code");
-
-      return axAuth.post<IAuth>("/oauth2/token", `code=${token}&grant_type=authorization_code&redirect_uri=https://fraumych.github.io/`, {
+      const token = new URLSearchParams(window.location.search).get("code");
+      const base = window.location.origin;
+      return axAuth.post<IAuth>("/oauth2/token", `code=${token}&grant_type=authorization_code&redirect_uri=${base}/`, {
          headers: {
             Authorization: "Basic eG51bWxoZHJkNnc0eGNiOmJ1bnhycTBqNXM4bHlzMw==",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -54,6 +55,13 @@ const APIrequest: React.FC<PropsWithChildren> = ({ children }) => {
       });
    };
 
+   const createFolder = (curentPath: string, name: string) => {
+      return axData.post("/2/files/create_folder_v2", {
+         "autorename": false,
+         "path": `${curentPath}/${name}`
+      });
+   };
+
    const deleteList = (path: string) => {
       return axData.post("/2/files/delete_v2", {
          "path": path,
@@ -62,7 +70,7 @@ const APIrequest: React.FC<PropsWithChildren> = ({ children }) => {
    };
 
    return (
-      <APIContext.Provider value={{ Authorization, accountName, getListFolder, deleteList }}>{children}</APIContext.Provider>
+      <APIContext.Provider value={{ Authorization, accountName, getListFolder, deleteList, createFolder }}>{children}</APIContext.Provider>
    );
 };
 

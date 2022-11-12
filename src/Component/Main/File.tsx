@@ -14,7 +14,6 @@ const File: React.FC = () => {
    const [listFolder, setListFolder] = useState<IListFolder[]>([]);
 
    const [pathFolder, setPathFolder] = useState("");
-
    useEffect(() => {
 
       getListFolder("").then(

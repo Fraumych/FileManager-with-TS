@@ -9,26 +9,36 @@ interface ContextMenuListProps {
 }
 
 const ContextMenuList: React.FC<ContextMenuListProps> = ({ itemName, itemPath }) => {
+   const { deleteList, createFolder } = useContext(APIContext);
 
-   const { deleteList } = useContext(APIContext);
+   const [folderName, setFolderName] = useState("");
 
    const deleteFile = (itemPath: string) => {
       deleteList(itemPath);
    };
+
 
    const [modalActive, setModalActive] = useState(false);
 
    return (
       <div className={Style.ContextMenu}>
          <p className={Style.ItemName}>{itemName}</p>
+
          <div className={Style.ContextList}>
-            <button className={`btn ${Style.ItemList}`} onClick={() => { setModalActive(true); }}>Добавить</button>
+            <button className={`btn ${Style.ItemList}`} onClick={() => { setModalActive(true); }}>Создать Папку</button>
             <button className={`btn ${Style.ItemList}`} onClick={() => { deleteFile(itemPath); }}>Удалить</button>
-            <button className={`btn ${Style.ItemList}`} onClick={() => { setModalActive(true); }}>Добавить</button>
          </div>
+
          <Modal modalActive={modalActive} setModalActive={setModalActive}>
-            <h1>Не реализовано</h1>
-            <button className="btn btn-primary button-1" onClick={() => setModalActive(false)}>Ок</button>
+            <input placeholder="Введите имя папки" value={folderName} onChange={(e) => setFolderName(e.target.value)} />
+            <div style={{ display: "flex", justifyContent: "end" }}>
+               <button style={{ marginRight: "5px" }} className="btn btn-danger button-1" onClick={() => setModalActive(false)}>Отмена</button>
+               <button className="btn btn-primary button-1"
+                  onClick={() => {
+                     createFolder(itemPath, folderName);
+                     setModalActive(false);
+                  }}>Создать</button>
+            </div>
          </Modal>
       </div>
    );
